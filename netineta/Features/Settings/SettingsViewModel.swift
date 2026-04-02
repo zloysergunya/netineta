@@ -40,41 +40,45 @@ enum MonitoringInterval: Int, CaseIterable {
 final class SettingsViewModel {
 
     var dnsTimeout: DNSTimeout {
-        get { DNSTimeout(rawValue: UserDefaults.standard.integer(forKey: "dnsTimeout")) ?? .five }
-        set { UserDefaults.standard.set(newValue.rawValue, forKey: "dnsTimeout") }
+        didSet { UserDefaults.standard.set(dnsTimeout.rawValue, forKey: "dnsTimeout") }
     }
 
     var monitoringInterval: MonitoringInterval {
-        get { MonitoringInterval(rawValue: UserDefaults.standard.integer(forKey: "monitoringInterval")) ?? .three }
-        set { UserDefaults.standard.set(newValue.rawValue, forKey: "monitoringInterval") }
+        didSet { UserDefaults.standard.set(monitoringInterval.rawValue, forKey: "monitoringInterval") }
     }
 
     var historyRetention: HistoryRetention {
-        get { HistoryRetention(rawValue: UserDefaults.standard.string(forKey: "historyRetention") ?? "") ?? .month }
-        set { UserDefaults.standard.set(newValue.rawValue, forKey: "historyRetention") }
+        didSet { UserDefaults.standard.set(historyRetention.rawValue, forKey: "historyRetention") }
     }
 
     var notificationsEnabled: Bool {
-        get { UserDefaults.standard.bool(forKey: "notificationsEnabled") }
-        set { UserDefaults.standard.set(newValue, forKey: "notificationsEnabled") }
+        didSet { UserDefaults.standard.set(notificationsEnabled, forKey: "notificationsEnabled") }
     }
 
     var notifyDomainChanges: Bool {
-        get { UserDefaults.standard.bool(forKey: "notifyDomainChanges") }
-        set { UserDefaults.standard.set(newValue, forKey: "notifyDomainChanges") }
+        didSet { UserDefaults.standard.set(notifyDomainChanges, forKey: "notifyDomainChanges") }
     }
 
     var notifySystemStatus: Bool {
-        get { UserDefaults.standard.bool(forKey: "notifySystemStatus") }
-        set { UserDefaults.standard.set(newValue, forKey: "notifySystemStatus") }
+        didSet { UserDefaults.standard.set(notifySystemStatus, forKey: "notifySystemStatus") }
     }
 
     var notifyDailySummary: Bool {
-        get { UserDefaults.standard.bool(forKey: "notifyDailySummary") }
-        set { UserDefaults.standard.set(newValue, forKey: "notifyDailySummary") }
+        didSet { UserDefaults.standard.set(notifyDailySummary, forKey: "notifyDailySummary") }
     }
 
     var showClearConfirmation: Bool = false
+
+    init() {
+        let ud = UserDefaults.standard
+        self.dnsTimeout = DNSTimeout(rawValue: ud.integer(forKey: "dnsTimeout")) ?? .five
+        self.monitoringInterval = MonitoringInterval(rawValue: ud.integer(forKey: "monitoringInterval")) ?? .three
+        self.historyRetention = HistoryRetention(rawValue: ud.string(forKey: "historyRetention") ?? "") ?? .month
+        self.notificationsEnabled = ud.bool(forKey: "notificationsEnabled")
+        self.notifyDomainChanges = ud.bool(forKey: "notifyDomainChanges")
+        self.notifySystemStatus = ud.bool(forKey: "notifySystemStatus")
+        self.notifyDailySummary = ud.bool(forKey: "notifyDailySummary")
+    }
     var isUpdatingReferenceList: Bool = false
     var isExporting: Bool = false
     var exportURL: URL?
