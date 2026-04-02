@@ -1,0 +1,44 @@
+{
+    "version": 2,
+    "updatedAt": "2026-04-02",
+    "sourceUrl": null,
+    "blocked": [
+        "instagram.com",
+        "facebook.com",
+        "x.com",
+        "twitter.com",
+        "linkedin.com",
+        "tiktok.com",
+        "discord.com",
+        "twitch.tv",
+        "reddit.com",
+        "medium.com"
+    ],
+    "accessible": [
+        "google.com",
+        "apple.com",
+        "stackoverflow.com",
+        "github.com",
+        "wikipedia.org"
+    ],
+    "ruGov": [
+        "gosuslugi.ru",
+        "mos.ru",
+        "government.ru",
+        "kremlin.ru",
+        "nalog.gov.ru",
+        "pfr.gov.ru",
+        "vk.com",
+        "ok.ru",
+        "mail.ru",
+        "max.ru",
+        "yandex.ru",
+        "sberbank.ru",
+        "tinkoff.ru",
+        "cbr.ru"
+    ],
+    "unstable": [
+        "youtube.com",
+        "telegram.org"
+    ]
+}

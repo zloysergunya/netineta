@@ -1,17 +1,26 @@
-//
-//  netinetaApp.swift
-//  netineta
-//
-//  Created by Sergey Kotov on 02.04.2026.
-//
-
 import SwiftUI
+import SwiftData
 
 @main
 struct netinetaApp: App {
+
+    private let container: ModelContainer
+
+    init() {
+        do {
+            container = try AppDatabase.makeContainer()
+        } catch {
+            fatalError("Failed to create ModelContainer: \(error)")
+        }
+
+        BackgroundTaskManager.shared.registerTasks()
+        BackgroundTaskManager.shared.scheduleRefresh()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(container)
     }
 }
